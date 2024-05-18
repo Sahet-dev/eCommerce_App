@@ -1,24 +1,33 @@
 
 <template>
 
-    <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" />
-            <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                {{title}}</h2>
-        </div>
+    <div class="min-h-full flex bg-gray-200">
 
-        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form class="space-y-6" @submit.prevent="emit('submit')" method="POST">
-                <router-view>
 
-                </router-view>
-            </form>
+        <SidebarLayout />
 
+
+
+
+
+
+
+
+        <div class="flex-1">
+            <TopHeader></TopHeader>
+            <main class="p-6">
+                <div class="bg-white p-4 rounded">
+                    <router-view></router-view>
+
+                </div>
+            </main>
         </div>
     </div>
 </template>
 <script setup>
+import SidebarLayout from "./SidebarLayout.vue";
+import TopHeader from "./TopHeader.vue";
+
 const {title} = defineProps({
     title: String
 })
