@@ -4,6 +4,7 @@ import Login from "../components/views/Login.vue";
 import ResetPassword from "../components/views/ResetPassword.vue";
 import RequestPassword from "../components/views/RequestPassword.vue";
 import AppLayout from "../components/AppLayout.vue";
+import Products from "../components/views/Products.vue";
 
 const routes = [
     {
@@ -19,7 +20,7 @@ const routes = [
 {
                 path: "products",
                 name: "app.products",
-                component: Dashboard
+                component: Products
             },
 {
                 path: "users",

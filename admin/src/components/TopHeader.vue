@@ -1,14 +1,14 @@
 
 <template>
-    <header class=" flex justify-between items-center h-14 shadow bg-white ">
-        <button class="p-4">
+    <header class=" flex justify-between items-center p-4 h-14 shadow bg-white ">
+        <button @click="handleClick" class="flex items-center justify-center rounded transition-colors w-8 h-8 text-gray-700 hover:bg-black/10">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
             </svg>
 
         </button>
 
-        <div class="px-4">
+        <div class="">
             <Menu as="div" class="relative inline-block text-left">
                 <div>
                     <MenuButton
@@ -38,7 +38,7 @@
                             <MenuItem v-slot="{ active }">
                                 <button
                                     :class="[
-                  active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                  active ? 'bg-indigo-600 text-white' : 'text-gray-900',
                   'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                 ]"
                                 >
@@ -52,7 +52,7 @@
                             <MenuItem v-slot="{ active }">
                                 <button
                                     :class="[
-                  active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                  active ? 'bg-indigo-600 text-white' : 'text-gray-900',
                   'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                 ]"
                                 >
@@ -77,8 +77,17 @@
 
 </template>
 <script setup>
+import { defineEmits } from 'vue';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
+
+const emit = defineEmits(['toggle-sidebar']);
+
+function handleClick() {
+    emit('toggle-sidebar');
+}
+
+
 
 </script>
 
