@@ -1,6 +1,13 @@
 import axiosClient from "../axios.js";
-import store from "./index.js";
-import router from "../router/index.js";
+
+
+export function getUser({commit}) {
+    return axiosClient.get('/user')
+        .then((response) => {
+            commit('setUser', response.data)
+            return response
+        })
+}
 
 export function login({commit}, data) {
     return axiosClient.post('/login', data)

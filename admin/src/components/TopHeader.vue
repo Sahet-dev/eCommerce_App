@@ -15,7 +15,7 @@
                         class="flex items-center"
                     >
                         <img src="https://randomuser.me/api/portraits/men/69.jpg" class="rounded-full w-8 h-8 mr-2">
-                        <small>John Smith</small>
+                        <small>{{currentUser.name}}</small>
                         <ChevronDownIcon
                             class="h-5 w-5 text-violet-200 hover:text-violet-100"
                             aria-hidden="true"
@@ -77,17 +77,23 @@
 
 </template>
 <script setup>
-import { defineEmits } from 'vue';
+import {computed, defineEmits} from 'vue';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 import store from "../store/index.js";
-import router from "../router/index.js";
+import  {useRouter} from "vue-router";
+
+
+const router = useRouter();
 
 const emit = defineEmits(['toggle-sidebar']);
 
 function handleClick() {
     emit('toggle-sidebar');
 }
+
+
+const currentUser = computed(() => store.state.user.data);
 
 function logout() {
    store.dispatch('logout')
