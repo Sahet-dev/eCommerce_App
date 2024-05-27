@@ -8,6 +8,10 @@ export function setToken(state, token) {
        sessionStorage.setItem('TOKEN', token)
     } else {
         sessionStorage.removeItem('TOKEN')
-
     }
+}
+
+export function setProducts(state, [loading, response = {}]) {
+    state.products.loading = loading;
+    state.products.data = response.data
 }
