@@ -11,7 +11,11 @@ export function setToken(state, token) {
     }
 }
 
-export function setProducts(state, [loading, response = {}]) {
+export function setProducts(state, [loading, response = null]) {
+    if (response) {
+        return
+    }
     state.products.loading = loading;
     state.products.data = response.data
+    state.products.links = response.links
 }
