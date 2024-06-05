@@ -64,7 +64,7 @@
 
             <div class="flex justify-between items-center mt-5">
         <span>
-          Showing from {{ products.from }} to {{ products.to }}
+          Showing from {{ products.from }} to {{ products.to }} of {{ products.total }}
         </span>
                 <nav
                     v-if="products.total > products.limit"
