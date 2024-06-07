@@ -25,7 +25,6 @@
             </main>
         </div>
     </div>
-    <Spinner />
 </template>
 <script setup>
 import {ref, onMounted, onUnmounted, computed} from "vue";
