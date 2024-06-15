@@ -91,7 +91,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product): \Illuminate\Http\Response
     {
         $product->delete();
         return response()->noContent();

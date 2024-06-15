@@ -80,4 +80,16 @@ export function updateProduct({commit}, product) {
     return axiosClient.post(`/products/${id}`, product)
 }
 
+export function deleteProduct({ commit }, id) {
+    return axiosClient.delete(`/products/${id}`)
+        .then(() => {
+            commit('removeProduct', id);  // Assuming you have a mutation to handle this
+            return true;  // Indicate success
+        })
+        .catch(error => {
+            console.error("Failed to delete product:", error);
+            return false;  // Indicate failure
+        });
+}
+
 

@@ -11,6 +11,17 @@ export function setToken(state, token) {
     }
 }
 
+export function setProductLoading(state, loading) {
+    state.products.loading = loading;
+}
+
+export function setProductError(state, error) {
+    state.products.error = error;
+}
+
+
+
+
 export function setProducts(state, [loading, response = null]) {
     if (response) {
         state.products = {
@@ -25,3 +36,12 @@ export function setProducts(state, [loading, response = null]) {
     }
     state.products.loading = loading;
 }
+
+
+
+// Mutations in your Vuex store (e.g., store.js or in a module)
+export function removeProduct(state, productId) {
+        state.products.data = state.products.data.filter(product => product.id !== productId);
+    }
+    // Other mutations...
+
