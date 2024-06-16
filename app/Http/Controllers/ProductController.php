@@ -93,6 +93,11 @@ class ProductController extends Controller
      */
     public function destroy(Product $product): \Illuminate\Http\Response
     {
+        Log::info('Destroy method called', ['product_id' => $product->id]);
+
+        if ($product->image) {
+            Storage::delete($product->image);
+        }
         $product->delete();
         return response()->noContent();
     }

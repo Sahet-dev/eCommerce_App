@@ -211,17 +211,14 @@ function sortProduct(field) {
 }
 
 function deleteProduct(product) {
-    if (!confirm(`Are you sure you want to delete ${product.title}?`)) {
+    if (!confirm(`Are you sure you want to delete the product?`)) {
         return
     }
-    console.log('delete product', product.id)
-    store.dispatch('deleteProduct', product)
-        .then(res=> {
-                store.dispatch('getProducts')
-
+    store.dispatch('deleteProduct', product.id)
+        .then(res => {
+            store.commit('showToast', 'Product was successfully deleted');
+            store.dispatch('getProducts')
         })
-
-
 }
 
 
