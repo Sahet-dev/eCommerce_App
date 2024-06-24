@@ -14,7 +14,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/products/{id}', [ProductController::class, 'show']);
 
     Route::post('/products', [ProductController::class, 'store']);
-    Route::put('/products/{id}', [ProductController::class, 'update']);
+    Route::put('/products/{product}', [ProductController::class, 'update']);
 
 
 

@@ -40,7 +40,7 @@
                 <tr v-for="product of products.data">
                     <td class="border-b p-2 ">{{ product.id }}</td>
                     <td class="border-b p-2 ">
-                        <img class="w-16" :src="product.image" :alt="product.title">
+                        <img class="w-16" :src="product.image_url" :alt="product.title">
                     </td>
                     <td class="border-b p-2 max-w-[200px] whitespace-nowrap overflow-hidden text-ellipsis">
                         {{product.title}}
@@ -78,9 +78,9 @@
                                         <MenuItem as="div" v-slot="{ active }">
                                             <button
                                                 :class="[
-            active ? 'bg-indigo-600 text-white' : 'text-gray-900',
-            'group flex w-full items-center rounded-md px-2 py-2 text-sm'
-        ]"
+                                                    active ? 'bg-indigo-600 text-white' : 'text-gray-900',
+                                                    'group flex w-full items-center rounded-md px-2 py-2 text-sm'
+                                                ]"
                                                 @click="editProduct(product)"
                                             aria-label="Edit"
                                             >
@@ -139,13 +139,13 @@
                         aria-current="page"
                         class="relative inline-flex items-center px-4 py-2 border text-sm font-medium whitespace-nowrap"
                         :class="[
-              link.active
-                ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600'
-                : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50',
-              i === 0 ? 'rounded-l-md' : '',
-              i === products.links.length - 1 ? 'rounded-r-md' : '',
-              !link.url ? ' bg-gray-100 text-gray-700': ''
-            ]"
+                              link.active
+                                ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600'
+                                : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50',
+                              i === 0 ? 'rounded-l-md' : '',
+                              i === products.links.length - 1 ? 'rounded-r-md' : '',
+                              !link.url ? ' bg-gray-100 text-gray-700': ''
+                            ]"
                         v-html="link.label"
                     >
                     </a>
@@ -156,7 +156,7 @@
 </template>
 
 <script setup>
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, ref, defineEmits} from "vue";
 import store from "../../../store/index.js";
 import Spinner from "../../core/Spinner.vue";
 import {PRODUCTS_PER_PAGE} from "../../../constants.js";
@@ -164,7 +164,7 @@ import TableHeadingCell from "../../core/TableHeadingCell.vue";
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
 import {TrashIcon, PencilIcon, Bars3Icon} from '@heroicons/vue/20/solid';
 
-
+const emit = defineEmits(['clickEdit',]);
 const perPage = ref(PRODUCTS_PER_PAGE);
 const search = ref('');
 const products = computed(() => store.state.products);
@@ -210,6 +210,13 @@ function sortProduct(field) {
 
 }
 
+
+
+
+function editProduct(product) {
+    emit('clickEdit', product)
+}
+
 function deleteProduct(product) {
     if (!confirm(`Are you sure you want to delete the product?`)) {
         return
@@ -220,6 +227,10 @@ function deleteProduct(product) {
             store.dispatch('getProducts')
         })
 }
+
+
+
+
 
 
 </script>
