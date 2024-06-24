@@ -1,4 +1,5 @@
 import axiosClient from "../axios.js";
+import state from "./state.js";
 
 
 export function getUser({commit}) {
@@ -29,25 +30,37 @@ export function logout({commit}) {
     })
 }
 
-export function getProducts({commit, state}, {url = null, search = '', per_page , sort_field, sort_direction} = {}) {
+export function getProducts({commit}, {url = null, search = '', perPage = 10 , sort_field, sort_direction} = {}) {
     commit('setProducts', [true])
-    url = url || '/products'
-    const params = {
-        per_page: state.products.limit,
-    }
+    url = url || '/products';
+
     return axiosClient.get(url, {
         params: {
-            ...params,
-            search, per_page, sort_field, sort_direction
+            search,
+            per_page: perPage ,
+            sort_field,
+            sort_direction
+
         }
+
     })
         .then((response) => {
             commit('setProducts', [false, response.data])
+            console.log(';crap')
+
         })
         .catch(() => {
             commit('setProducts', [false])
         })
 }
+
+
+export function getProduct({}, id) {
+    console.log('Fetching product with ID:', id);
+    return  axiosClient.get(`/products/${id}`)
+}
+
+
 
 export function createProduct({commit}, product) {
     if (product.image instanceof File){
