@@ -36,7 +36,7 @@
                                     as="h3"
                                     class="text-lg font-medium leading-6 text-gray-900"
                                 >
-                                    {{product.id? `Update product: "${product.title}"` : `Add product`}}
+                                    {{product.id? `Update product: "${product.id}"` : `Add product`}}
                                 </DialogTitle>
                                 <button
                                     @click="closeModal" class="w-8 h-8 flex items-center justify-center rounded-full transition-colors text-gray-500 hover:text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

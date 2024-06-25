@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ProductController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\api\AuthController;
+use App\Http\Controllers\api\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
@@ -14,7 +13,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/products/{id}', [ProductController::class, 'show']);
 
     Route::post('/products', [ProductController::class, 'store']);
-    Route::put('/products/{id}', [ProductController::class, 'update']);
+    Route::put('/products/{product}', [ProductController::class, 'update']);
 
 
 

@@ -75,17 +75,16 @@ import {computed} from "vue";
 
 const props = defineProps({
     modelValue: {
-        type: [String, Number, File],
-        label: String
+        type: [String, Number, File]
     },
-
+    label: String,
     type: {
         type: String,
         default: 'text'
     },
     name: {
         type: String,
-        required: Boolean
+        required: false
     },
     prepend: {
         type: String,
@@ -94,8 +93,13 @@ const props = defineProps({
     append: {
         type: String,
         default: ''
+    },
+    required: {
+        type: Boolean,
+        default: false
     }
 })
+
 
 const inputClasses = computed(() => {
     const cls = [
