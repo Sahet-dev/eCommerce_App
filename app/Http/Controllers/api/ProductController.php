@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductListResource;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
-use Illuminate\Http\UploadedFile;
+use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
@@ -55,7 +53,7 @@ class ProductController extends Controller
         $date['created_by'] = $request->user()->id;
         $date['updated_by'] = $request->user()->id;
 
-        /*** @var UploadedFile $image */
+        /*** @var \Illuminate\Http\UploadedFile $image */
         $image = $data['image'] ?? null;
         if ($image){
             $relativePath = $this->saveImage($image);
@@ -75,12 +73,8 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        $product = Product::find($id);
-        if (!$product) {
-            return response()->json(['message' => 'Product not found'], 404);
-        }
         return new ProductResource($product);
     }
 
@@ -89,46 +83,17 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
-        $data = $request->validated();
-        $data['updated_by'] = $request->user()->id;
-        /*** @var UploadedFile $image */
-        $image = $data['image'] ?? null;
-        if ($image) {
-            $relativePath = $this->saveImage($image);
-            $data['image'] = URL::to(Storage::url($relativePath));
-            $data['image_mime'] = $image->getClientMimeType();
-            if ($product->image) {
-                Storage::deleteDirectory('public/' . dirname($product->image));
-            }
-        }
-        Log::info('Loaded product:', ['id' => $product->id]);
-
-        // Manually updating each field
-        $product->title = $data['title'];
-        $product->description = $data['description'];
-        $product->price = $data['price'];
-        $product->updated_by = $data['updated_by'];
-        if (isset($data['image'])) {
-            $product->image = $data['image'];
-        }
-
-        // Attempt to save and log the result
-        if (!$product->save()) {
-            Log::error('Manual save failed', ['id' => $product->id]);
-            return response()->json(['message' => 'Update failed'], 500);
-        } else {
-            Log::info('Manual save succeeded', ['id' => $product->id]);
-        }
+        $product->update($request->validate());
 
         return new ProductResource($product);
     }
-
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Product $product): \Illuminate\Http\Response
     {
+        Log::info('Destroy method called', ['product_id' => $product->id]);
 
         if ($product->image) {
             Storage::delete($product->image);
@@ -137,7 +102,7 @@ class ProductController extends Controller
         return response()->noContent();
     }
 
-    private function saveImage(UploadedFile $image)
+    private function saveImage(\Illuminate\Http\UploadedFile $image)
     {
         $path = 'images/' . Str::random();
         if (!Storage::exists($path)){

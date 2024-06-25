@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white p-4 rounded-lg shadow">
+    <div class="bg-white p-4 rounded-lg shadow animate-fade-in-down">
         {{ search }}
 
         <div class="flex justify-between border-b-2 pb-3">
@@ -37,7 +37,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="product of products.data">
+                <tr v-for="(product, index) of products.data" class="animate-fade-in-down" :style="{'animationDelay': `${index * 0.05}s`}">
                     <td class="border-b p-2 ">{{ product.id }}</td>
                     <td class="border-b p-2 ">
                         <img class="w-16" :src="product.image_url" :alt="product.title">
