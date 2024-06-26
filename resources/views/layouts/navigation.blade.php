@@ -3,36 +3,14 @@
     class="flex justify-between bg-slate-800 shadow-md text-white"
 >
     <div>
-        <a href="/src" class="block py-navbar-item pl-5"> Logo </a>
+        <a href="{{route('home')}}" class="block py-navbar-item pl-5"> Logo </a>
     </div>
     <!-- Responsive Menu -->
     <div
         class="block fixed z-10 top-0 bottom-0 height h-full w-[220px] transition-all bg-slate-900 md:hidden"
         :class="mobileMenuOpen ? 'left-0' : '-left-[220px]'"
     >
-        <ul>
-            <li>
-                <a
-                    href="/src/index.html"
-                    class="block py-2 px-3 transition-colors hover:bg-slate-800"
-                >Home</a
-                >
-            </li>
-            <li>
-                <a
-                    href="#"
-                    class="block py-2 px-3 transition-colors hover:bg-slate-800"
-                >Categories</a
-                >
-            </li>
-            <li>
-                <a
-                    href="#"
-                    class="block py-2 px-3 transition-colors hover:bg-slate-800"
-                >Something</a
-                >
-            </li>
-        </ul>
+
         <ul>
             <li>
                 <a
@@ -66,7 +44,9 @@
                     <!--/ Cart Items Counter -->
                 </a>
             </li>
-            <li x-data="{open: false}" class="relative">
+            @if(!Auth::guest())
+
+                <li x-data="{open: false}" class="relative">
                 <a
                     @click="open = !open"
                     class="cursor-pointer flex justify-between items-center py-2 px-3 hover:bg-slate-800"
@@ -180,86 +160,65 @@
                         </a>
                     </li>
                     <li class="hover:bg-slate-900">
-                        <a
-                            href="/src/logout.html"
-                            class="flex items-center px-3 py-2 hover:bg-slate-900"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5 mr-2"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                stroke-width="2"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                                />
-                            </svg>
-                            Logout
-                        </a>
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button type="submit" class="flex w-full items-center px-3 py-2 hover:bg-slate-900">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-5 w-5 mr-2"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                                    />
+                                </svg>
+                                Logout</button>
+                        </form>
+
                     </li>
                 </ul>
             </li>
-            <li>
-                <a
-                    href="/src/login.html"
-                    class="flex items-center py-2 px-3 transition-colors hover:bg-slate-800"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-6 w-6 mr-2"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="2"
+            @else
+                <li>
+                    <a
+                        href="{{route('login')}}"
+                        class="flex items-center py-2 px-3 transition-colors hover:bg-slate-800"
                     >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-                        />
-                    </svg>
-                    Login
-                </a>
-            </li>
-            <li class="px-3 py-3">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-6 w-6 mr-2"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+                            />
+                        </svg>
+                        Login
+                    </a>
+                </li>
+                <li class="px-3 py-3">
                 <a
-                    href="/src/signup.html"
+                    href="{{route('register')}}"
                     class="block text-center text-white bg-emerald-600 py-2 px-3 rounded shadow-md hover:bg-emerald-700 active:bg-emerald-800 transition-colors w-full"
                 >
                     Register now
                 </a>
             </li>
+            @endif
         </ul>
     </div>
     <!--/ Responsive Menu -->
     <nav class="hidden md:block">
-        <ul class="grid grid-flow-col">
-            <li>
-                <a
-                    href="/src/index.html"
-                    class="block py-navbar-item px-navbar-item hover:bg-slate-900"
-                >Home</a
-                >
-            </li>
-            <li>
-                <a
-                    href="#"
-                    class="block py-navbar-item px-navbar-item hover:bg-slate-900"
-                >Categories</a
-                >
-            </li>
-            <li>
-                <a
-                    href="#"
-                    class="block py-navbar-item px-navbar-item hover:bg-slate-900"
-                >Something</a
-                >
-            </li>
-        </ul>
     </nav>
     <nav class="hidden md:block">
         <ul class="grid grid-flow-col items-center">
@@ -292,7 +251,8 @@
                     ></small>
                 </a>
             </li>
-            <li x-data="{open: false}" class="relative">
+            @if(!Auth::guest())
+                <li x-data="{open: false}" class="relative">
                 <a
                     @click="open = !open"
                     class="cursor-pointer flex items-center py-navbar-item px-navbar-item pr-5 hover:bg-slate-900"
@@ -410,59 +370,60 @@
                         </a>
                     </li>
                     <li>
-                        <a
-                            href="/src/logout.html"
-                            class="flex px-3 py-2 hover:bg-slate-900"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5 mr-2"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                stroke-width="2"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                                />
-                            </svg>
-                            Logout
-                        </a>
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button type="submit" class="flex w-full items-center px-3 py-2 hover:bg-slate-900">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-5 w-5 mr-2"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                                    />
+                                </svg>
+                                Logout</button>
+                        </form>
                     </li>
                 </ul>
             </li>
-            <li>
-                <a
-                    href="/src/login.html"
-                    class="flex items-center py-navbar-item px-navbar-item hover:bg-slate-900"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5 mr-2"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="2"
+            @else
+                <li>
+                    <a
+                        href="{{route('login')}}"
+                        class="flex items-center py-navbar-item px-navbar-item hover:bg-slate-900"
                     >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-                        />
-                    </svg>
-                    Login
-                </a>
-            </li>
-            <li>
-                <a
-                    href="/src/signup.html"
-                    class="inline-flex items-center text-white bg-emerald-600 py-2 px-3 rounded shadow-md hover:bg-emerald-700 active:bg-emerald-800 transition-colors mx-5"
-                >
-                    Register now
-                </a>
-            </li>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 mr-2"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+                            />
+                        </svg>
+                        Login
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="{{route('register')}}"
+                        class="inline-flex items-center text-white bg-emerald-600 py-2 px-3 rounded shadow-md hover:bg-emerald-700 active:bg-emerald-800 transition-colors mx-5"
+                    >
+                        Register now
+                    </a>
+                </li>
+            @endif
         </ul>
     </nav>
     <button
