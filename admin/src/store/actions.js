@@ -21,23 +21,23 @@ export function login({commit}, data) {
 
 export function logout({commit}) {
     return axiosClient.post('/logout')
-    .then((response) => {
-        commit('setToken', null)
-        return response
-    })
-    .catch((error) => {
+        .then((response) => {
             commit('setToken', null)
-    })
+            return response
+        })
+        .catch((error) => {
+            commit('setToken', null)
+        })
 }
 
-export function getProducts({commit}, {url = null, search = '', perPage = 10 , sort_field, sort_direction} = {}) {
+export function getProducts({commit}, {url = null, search = '' , sort_field, sort_direction} = {}) {
     commit('setProducts', [true])
     url = url || '/products';
 
     return axiosClient.get(url, {
         params: {
             search,
-            per_page: perPage ,
+            // per_page: perPage ,
             sort_field,
             sort_direction
 
@@ -104,5 +104,4 @@ export function deleteProduct({ commit }, id) {
             return false;  // Indicate failure
         });
 }
-
 

@@ -22,14 +22,14 @@
                 :class="inputClasses"
                 :placeholder="label"></textarea>
             </template>
-<!--            <template v-else-if="type === 'richtext'">-->
-<!--                <ckeditor :editor="editor"-->
-<!--                          :required="required"-->
-<!--                          :model-value="props.modelValue"-->
-<!--                          @input="onChange"-->
-<!--                          :class="inputClasses"-->
-<!--                          :config="editorConfig"></ckeditor>-->
-<!--            </template>-->
+            <!--            <template v-else-if="type === 'richtext'">-->
+            <!--                <ckeditor :editor="editor"-->
+            <!--                          :required="required"-->
+            <!--                          :model-value="props.modelValue"-->
+            <!--                          @input="onChange"-->
+            <!--                          :class="inputClasses"-->
+            <!--                          :config="editorConfig"></ckeditor>-->
+            <!--            </template>-->
             <template v-else-if="type === 'file'">
                 <input :type="type"
                        :name="name"
@@ -64,7 +64,7 @@
         {{ append }}
       </span>
         </div>
-<!--        <small v-if="errors && errors[0]" class="text-red-600">{{ errors[0] }}</small>-->
+        <!--        <small v-if="errors && errors[0]" class="text-red-600">{{ errors[0] }}</small>-->
     </div>
 </template>
 

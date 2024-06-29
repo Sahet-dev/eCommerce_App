@@ -39,7 +39,7 @@ function showProductModal() {
 
 function editProduct(product) {
     store.dispatch('getProduct', product.id)
-        .then(({data})=>{
+        .then(({data}) => {
             productModel.value = data
             showProductModal()
             console.log('called: editProduct in Products.vue')

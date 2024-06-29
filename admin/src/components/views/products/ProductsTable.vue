@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white p-4 rounded-lg shadow animate-fade-in-down">
+    <div class="bg-white p-4 rounded-lg shadow">
         {{ search }}
 
         <div class="flex justify-between border-b-2 pb-3">
@@ -37,7 +37,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(product, index) of products.data" class="animate-fade-in-down" :style="{'animationDelay': `${index * 0.05}s`}">
+                <tr v-for="product of products.data">
                     <td class="border-b p-2 ">{{ product.id }}</td>
                     <td class="border-b p-2 ">
                         <img class="w-16" :src="product.image_url" :alt="product.title">
@@ -82,14 +82,14 @@
                                                     'group flex w-full items-center rounded-md px-2 py-2 text-sm'
                                                 ]"
                                                 @click="editProduct(product)"
-                                            aria-label="Edit"
+                                                aria-label="Edit"
                                             >
-                                            <PencilIcon
-                                                :active="active"
-                                                class="mr-2 h-5 w-5 text-indigo-400"
-                                                aria-hidden="true"
-                                            />
-                                            Edit
+                                                <PencilIcon
+                                                    :active="active"
+                                                    class="mr-2 h-5 w-5 text-indigo-400"
+                                                    aria-hidden="true"
+                                                />
+                                                Edit
                                             </button>
                                         </MenuItem>
                                         <MenuItem as="div" v-slot="{ active }">
