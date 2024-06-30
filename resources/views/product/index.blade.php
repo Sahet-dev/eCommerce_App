@@ -14,7 +14,7 @@
           })"
             class="border border-1 border-gray-200 rounded-md hover:border-purple-600 transition-colors bg-white"
         >
-            <a href="/src/product.html" class="block overflow-hidden aspect-[4/3]">
+            <a href="{{ route('product.view', $product->slug) }}" class="block overflow-hidden aspect-[4/3]">
                 <img
                     src="{{$product->image}}"
                     alt=""
@@ -23,11 +23,11 @@
             </a>
             <div class="p-4">
                 <h3 class="text-lg">
-                    <a href="/src/product.html">
+                    <a href={{ route('product.view', $product->slug) }}">
                         {{$product->title}}
                     </a>
                 </h3>
-                <h5 class="font-bold">${{$product->price}}</h5>
+                <h5 class="font-bold">${{$product->price}}</h3>
             </div>
             <div class="flex justify-between py-3 px-4">
                 <button
