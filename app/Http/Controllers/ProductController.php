@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ProductListResource;
 use App\Http\Resources\ProductResource;
-use App\Models\Product;
+use App\Models\Api\Product;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
