@@ -3,7 +3,8 @@ import './bootstrap';
 import Alpine from 'alpinejs';
 import {persist} from "@alpinejs/persist";
 import {collapse} from '@alpinejs/collapse';
-import {post} from "axios";
+import {get, post} from "./http.js";
+
 
 Alpine.plugin(persist);
 Alpine.plugin(collapse);
