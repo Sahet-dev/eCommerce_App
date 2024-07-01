@@ -14,11 +14,8 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-
 </head>
 <body>
-
 @include('layouts.navigation')
 
 <main class="p-5">
