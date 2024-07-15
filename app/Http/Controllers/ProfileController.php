@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AddressType;
+use App\Models\Country;
+use App\Models\CustomerAdress;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -14,6 +17,28 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+    public function view(Request $request): View
+    {
+        /** @var \App\Models\User $user */
+        $user = $request->user();
+
+        $customer = $user->customer;
+
+
+
+        $shippingAddress = $customer->shippingAddress ?: new CustomerAdress(['type' => AddressType::SHIPPING]);
+        $billingAddress = $customer->billingAddress ?: new CustomerAdress(['type' => AddressType::BILLING]);
+
+
+
+
+        $countries = Country::query()->orderBy('name')->get();
+
+        return view('profile.view', compact('customer', 'user', 'shippingAddress', 'billingAddress', 'countries'));
+    }
+
+
+
     public function edit(Request $request): View
     {
         return view('profile.edit', [
